@@ -1,3 +1,20 @@
 # Description 
 
-This is will be a central repo for custom terraform modules as well as a CLI tool that lets you create entire deployment pipelines for other repos using github actions, aws elasticbeanstalk, cloudflare,  terraform, terragrunt.
+This module creates a s3 bucket to store your terraform states and a dynamo tables for lock states. The s3 compartment hierarchy is organised for managing elasticbeanstalk applications:
+
+```sh
+➜  s3-bucket-name tree .
+.
+├── elasticbeanstalk-app1
+│   ├── dev
+│   │   └── tf.state
+│   └── prod
+│       └── tf.state
+└── elasticbeanstalk-app2
+    ├── dev
+    │   └── tf.state
+    └── prod
+        └── tf.state
+
+7 directories, 4 files
+```
