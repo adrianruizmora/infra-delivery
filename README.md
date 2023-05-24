@@ -10,3 +10,11 @@ This is will be a central repo for custom terraform modules as well as a tool th
 ## Templates
 
 Set of required and configurable files that will be copied to a new project in order to add a pipeline.
+
+## Useful commands
+
+Retrieve Solution Stacks to set variable in **templates/set_tf_vars.sh** script
+
+```sh
+    aws elasticbeanstalk list-available-solution-stacks --query "SolutionStacks"
+```
