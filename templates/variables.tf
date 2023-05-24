@@ -19,13 +19,11 @@ variable "environment" {
 variable "solution_stack" {
   description = "platform name use to run the app"
   type        = string
-  default     = ""
 }
 
 variable "ssh_access_key" {
   description = "ssh key use to access ec2 instances"
   type        = string
-  default     = ""
 }
 
 variable "instance_types" {
