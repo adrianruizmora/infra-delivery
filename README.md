@@ -1,6 +1,11 @@
 # Description 
 
-This is will be a central repo for custom terraform modules as well as a CLI tool that lets you create entire deployment pipelines for other repos using github actions, aws elasticbeanstalk, cloudflare,  terraform, terragrunt.
+Deploy FAST and EASY your applications adding CI/CD, IaC, immutable deployments and scalable environments in AWS cloud and Cloudflare.
+Everything is AUTOMATICALLY added to your projects !
+This project aims to abstract some concepts of DevOps so you can focus on writting code !
+
+
+This is will be a central repo for custom terraform modules as well as a tool that lets you create entire deployment pipelines for your projects.
 
 ## Templates
 
