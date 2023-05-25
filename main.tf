@@ -1,10 +1,6 @@
-resource "aws_elastic_beanstalk_application" "compute" {
-  name = var.application
-}
-
 resource "aws_elastic_beanstalk_environment" "compute" {
   name                   = "${var.application}-${var.environment}"
-  application            = aws_elastic_beanstalk_application.compute.name
+  application            = var.application
   solution_stack_name    = var.solution_stack
   cname_prefix           = "${var.application}-${var.environment}"
   tier                   = "WebServer"
