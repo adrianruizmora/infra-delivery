@@ -19,26 +19,30 @@ copy_files() {
     local infra_dir="$path/infra/terraform"
 
     if [[ -d "$infra_dir" ]]; then
-        read -p "The directory structure already exists. Do you want to overwrite it? (y/n): " choice
+        read -p "The $infra_dir directory already exists. Do you want to overwrite it? (y/n): " choice
         if [[ "$choice" != "y" ]]; then
             echo "Aborted."
             return
         else
             rm -rf "$infra_dir"
+            mkdir -p "$infra_dir/eb-app"
             mkdir -p "$infra_dir/dev"
             mkdir -p "$infra_dir/prod"
             echo "Overwritten existing directory structure in $path"
         fi
     else
+        mkdir -p "$infra_dir/eb-app"
         mkdir -p "$infra_dir/dev"
         mkdir -p "$infra_dir/prod"
         echo "Created directory structure in $path"
     fi
 
-    local source_dir="./templates/infra/terraform/environment"
+    local eb_app_source_dir="./templates/infra/terraform/immutable-environment/eb_app"
+    local eb_environment_source_dir="./templates/infra/terraform/immutable-environment/eb_environment"
 
-    cp -r "$source_dir/." "$infra_dir/dev"
-    cp -r "$source_dir/." "$infra_dir/prod"
+    cp -r "$eb_app_source_dir/." "$infra_dir/eb-app" 
+    cp -r "$eb_environment_source_dir/." "$infra_dir/dev"
+    cp -r "$eb_environment_source_dir/." "$infra_dir/prod"
 
     echo "Files copied successfully."
 }

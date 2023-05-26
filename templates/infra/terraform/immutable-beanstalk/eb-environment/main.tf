@@ -15,12 +15,9 @@ terraform {
 //   profile                  = "default"
 // }
 
-module "tf-backend" {
-  source              = "git::git@github.com:adrianruizmora/infra-delivery.git?ref=tf-backend"
-  backend_bucket_name = var.backend_bucket_name
-}
 
 module "immutable-elasticbeanstalk" {
+  depends_on = [ aws_elastic_beanstalk_application.compute ]
   source         = "git::git@github.com:adrianruizmora/infra-delivery.git?ref=immutable-elasticbeanstalk"
   application    = var.application
   environment    = var.environment
