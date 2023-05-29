@@ -13,3 +13,14 @@ remote_state {
     dynamodb_table = "${get_env("TF_VAR_application")}-lock"
   }
 }
+
+dependency "elasticbeanstalk-application" {
+  config_path = "../eb-app"
+  mock_outputs = {
+  eb-app-name = "demo-infra-app"
+  }
+}
+
+inputs = {
+  application = dependency.elasticbeanstalk-application.outputs.eb-app-name
+}

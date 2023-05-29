@@ -37,12 +37,14 @@ copy_files() {
         echo "Created directory structure in $path"
     fi
 
-    local eb_app_source_dir="./templates/infra/terraform/immutable-environment/eb_app"
-    local eb_environment_source_dir="./templates/infra/terraform/immutable-environment/eb_environment"
+    local template_immutable_beanstalk="./templates/infra/terraform/immutable-beanstalk"
+    local eb_app_source_dir="$template_immutable_beanstalk/eb-app"
+    local eb_environment_source_dir="$template_immutable_beanstalk/eb-environment"
 
     cp -r "$eb_app_source_dir/." "$infra_dir/eb-app" 
     cp -r "$eb_environment_source_dir/." "$infra_dir/dev"
     cp -r "$eb_environment_source_dir/." "$infra_dir/prod"
+    cp "$template_immutable_beanstalk/"*.sh "$infra_dir"
 
     echo "Files copied successfully."
 }
