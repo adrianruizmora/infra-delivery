@@ -17,7 +17,7 @@ remote_state {
 dependency "elasticbeanstalk_environment" {
   config_path = "../eb-environment"
   mock_outputs = {
-  #eb_app_cname = "demo-infra-app"
+  eb_app_cname = "${get_env("TF_VAR_application")}-${get_env("TF_VAR_environment")}.${get_env("TF_VAR_aws_region")}.elasticbeanstalk.com"
   }
 }
 
