@@ -1,3 +1,3 @@
 output "eb_app_cname" {
-    value = immutable_elasticbeanstalk.compute.cname
+    value = module.immutable_elasticbeanstalk.compute.cname
 }
