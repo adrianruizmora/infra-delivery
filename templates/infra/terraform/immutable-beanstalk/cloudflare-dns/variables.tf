@@ -15,3 +15,9 @@ variable "eb_app_cname" {
   description = "cname of elasticbeanstalk application"
   type        = string
 }
+
+//declared as TF_VAR
+variable "cloudflare_api_token" {
+  description = "cloudflare api token"
+  type        = string
+}

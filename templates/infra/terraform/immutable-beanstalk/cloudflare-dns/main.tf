@@ -14,9 +14,10 @@ terraform {
 //   shared_credentials_files = [""]
 //   profile                  = "default"
 // }
-# provider "cloudflare" {
-#   # Configuration options
-# }
+
+provider "cloudflare" {
+  api_token = var.cloudflare_api_token
+}
 
 resource "cloudflare_record" "compute" {
   zone_id = var.cloudflare_zone_id
