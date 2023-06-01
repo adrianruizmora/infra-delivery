@@ -5,7 +5,7 @@ set -e
 source ./set_tf_vars.sh
 
 # Create elasticbeanstalk application independently from environments
-modules=("eb-app" "$TF_VAR_environment" "cloudflare-dns")
+modules=("eb-app" "$TF_VAR_environment")
 
 valid_command=false
 

@@ -9,6 +9,5 @@ export TF_VAR_ssh_access_key=""
 export TF_VAR_healthcheck_endpoint=""
 export TF_VAR_cloudflare_zone_id=""
 export TF_VAR_subdomain=""
-export TF_VAR_eb_app_cname=""
 export TF_VAR_cloudflare_api_token=""
 #export TF_VAR_application_variables='{"key1": "value1", "key2": "value2"}'

@@ -4,6 +4,10 @@ terraform {
       source  = "hashicorp/aws"
       version = "~> 4.67.0"
     }
+    cloudflare = {
+      source = "cloudflare/cloudflare"
+      version = "4.7.1"
+    }
   }
 }
 
@@ -15,6 +19,9 @@ terraform {
 //   profile                  = "default"
 // }
 
+provider "cloudflare" {
+  api_token = var.cloudflare_api_token
+}
 
 module "immutable_elasticbeanstalk" {
   source         = "git::git@github.com:adrianruizmora/infra-delivery.git?ref=immutable-elasticbeanstalk"
@@ -25,4 +32,12 @@ module "immutable_elasticbeanstalk" {
   instance_types = var.instance_types
   healthcheck_endpoint = var.healthcheck_endpoint
   application_variables = var.application_variables
+}
+
+resource "cloudflare_record" "compute" {
+  zone_id = var.cloudflare_zone_id
+  name = var.subdomain
+  value = module.immutable_elasticbeanstalk.eb_app_cname
+  type = "CNAME"
+  proxied = true
 }

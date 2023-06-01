@@ -43,3 +43,21 @@ variable "application_variables" {
   type        = map(string)
   default = {}
 }
+
+//declared as TF_VAR
+variable "cloudflare_zone_id" {
+  description = "wemap zone id of domain in cloudflare"
+  type        = string
+}
+
+//declared as TF_VAR
+variable "subdomain" {
+  description = "desired subdomain for the application"
+  type        = string
+}
+
+//declared as TF_VAR
+variable "cloudflare_api_token" {
+  description = "cloudflare api token"
+  type        = string
+}
