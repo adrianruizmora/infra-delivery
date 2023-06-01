@@ -28,22 +28,26 @@ copy_files() {
             mkdir -p "$infra_dir/eb-app"
             mkdir -p "$infra_dir/dev"
             mkdir -p "$infra_dir/prod"
+            mkdir -p "$infra_dir/cloudflare-dns"
             echo "Overwritten existing directory structure in $path"
         fi
     else
         mkdir -p "$infra_dir/eb-app"
         mkdir -p "$infra_dir/dev"
         mkdir -p "$infra_dir/prod"
+        mkdir -p "$infra_dir/cloudflare-dns"
         echo "Created directory structure in $path"
     fi
 
     local template_immutable_beanstalk="./templates/infra/terraform/immutable-beanstalk"
     local eb_app_source_dir="$template_immutable_beanstalk/eb-app"
     local eb_environment_source_dir="$template_immutable_beanstalk/eb-environment"
+    local cloudflare_dns_source_dir="$template_immutable_beanstalk/cloudflare-dns"
 
     cp -r "$eb_app_source_dir/." "$infra_dir/eb-app" 
     cp -r "$eb_environment_source_dir/." "$infra_dir/dev"
     cp -r "$eb_environment_source_dir/." "$infra_dir/prod"
+    cp -r "$cloudflare_dns_source_dir/." "$infra_dir/cloudflare-dns"
     cp "$template_immutable_beanstalk/"*.sh "$infra_dir"
 
     echo "Files copied successfully."
