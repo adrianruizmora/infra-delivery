@@ -16,7 +16,7 @@ terraform {
 // }
 
 
-module "immutable-elasticbeanstalk" {
+module "immutable_elasticbeanstalk" {
   source         = "git::git@github.com:adrianruizmora/infra-delivery.git?ref=immutable-elasticbeanstalk"
   application    = var.application
   environment    = var.environment

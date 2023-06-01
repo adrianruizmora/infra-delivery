@@ -7,20 +7,20 @@ remote_state {
   config = {
     bucket = get_env("TF_VAR_backend_bucket_name")
 
-    key = "${get_env("TF_VAR_application")}/${get_env("TF_VAR_environment")}/terraform.tfstate"
+    key = "${get_env("TF_VAR_application")}/${basename(get_env("PWD"))}/terraform.tfstate"
     region         = "${get_env("TF_VAR_aws_region")}"
     encrypt        = true
     dynamodb_table = "${get_env("TF_VAR_application")}-lock"
   }
 }
 
-dependency "elasticbeanstalk_application" {
-  config_path = "../eb-app"
+dependency "elasticbeanstalk_environment" {
+  config_path = "../eb-environment"
   mock_outputs = {
-  eb_app_name = "demo-infra-app"
+  #eb_app_cname = "demo-infra-app"
   }
 }
 
 inputs = {
-  application = dependency.elasticbeanstalk_application.outputs.eb_app_name
+  eb_app_cname = dependency.elasticbeanstalk_environment.outputs.eb_app_cname
 }
