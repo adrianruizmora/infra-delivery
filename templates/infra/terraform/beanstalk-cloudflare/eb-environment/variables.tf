@@ -41,23 +41,25 @@ variable "healthcheck_endpoint" {
 variable "application_variables" {
   description = "environment variables for the application"
   type        = map(string)
-  default = {}
+  default     = {}
 }
 
 //declared as TF_VAR
 variable "cloudflare_zone_id" {
   description = "wemap zone id of domain in cloudflare"
   type        = string
-}
-
-//declared as TF_VAR
-variable "subdomain" {
-  description = "desired subdomain for the application"
-  type        = string
+  sensitive   = true
 }
 
 //declared as TF_VAR
 variable "cloudflare_api_token" {
   description = "cloudflare api token"
+  type        = string
+  sensitive   = true
+}
+
+//declared as TF_VAR
+variable "subdomain" {
+  description = "desired subdomain for the application"
   type        = string
 }
