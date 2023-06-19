@@ -30,6 +30,60 @@ resource "aws_elastic_beanstalk_environment" "compute" {
   }
 
   setting {
+    namespace = "aws:autoscaling:asg"
+    name      = "MinSize"
+    value     = 1
+  }
+
+  setting {
+    namespace = "aws:autoscaling:asg"
+    name      = "MaxSize"
+    value     = 4
+  }
+
+  setting {
+    namespace = "aws:autoscaling:trigger"
+    name      = "MeasureName"
+    value     = "UnhealthyHostCount"
+  }
+
+  setting {
+    namespace = "aws:autoscaling:trigger"
+    name      = "Statistic"
+    value     = "Maximum"
+  }
+
+  setting {
+    namespace = "aws:autoscaling:trigger"
+    name      = "Unit"
+    value     = "Count"
+  }
+
+  setting {
+    namespace = "aws:autoscaling:trigger"
+    name      = "UpperThreshold"
+    value     = 0
+  }
+
+  setting {
+    namespace = "aws:autoscaling:trigger"
+    name      = "UpperBreachScaleIncrement"
+    value     = 1
+  }
+
+  setting {
+    namespace = "aws:autoscaling:trigger"
+    name      = "LowerThreshold"
+    value     = 1
+  }
+
+  setting {
+    namespace = "aws:autoscaling:trigger"
+    name      = "LowerBreachScaleIncrement"
+    value     = -1
+  }
+
+  setting {
     namespace = "aws:autoscaling:updatepolicy:rollingupdate"
     name      = "RollingUpdateType"
     value     = "Immutable"

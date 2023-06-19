@@ -36,6 +36,6 @@ variable "healthcheck_endpoint" {
 
 variable "application_variables" {
   description = "environment variables for the application"
-  type = map(string)
-  default = {}
+  type        = map(string)
+  default     = {}
 }
