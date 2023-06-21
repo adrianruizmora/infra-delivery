@@ -32,37 +32,37 @@ resource "aws_elastic_beanstalk_environment" "compute" {
   setting {
     namespace = "aws:autoscaling:asg"
     name      = "MinSize"
-    value     = 1
+    value     = var.min_instance
   }
 
   setting {
     namespace = "aws:autoscaling:asg"
     name      = "MaxSize"
-    value     = 4
+    value     = var.max_instance
   }
 
   setting {
     namespace = "aws:autoscaling:trigger"
     name      = "MeasureName"
-    value     = "UnhealthyHostCount"
+    value     = "CPUUtilization"
   }
 
   setting {
     namespace = "aws:autoscaling:trigger"
     name      = "Statistic"
-    value     = "Maximum"
+    value     = "Average"
   }
 
   setting {
     namespace = "aws:autoscaling:trigger"
     name      = "Unit"
-    value     = "Count"
+    value     = "Percent"
   }
 
   setting {
     namespace = "aws:autoscaling:trigger"
     name      = "UpperThreshold"
-    value     = 0
+    value     = 50
   }
 
   setting {
@@ -74,13 +74,25 @@ resource "aws_elastic_beanstalk_environment" "compute" {
   setting {
     namespace = "aws:autoscaling:trigger"
     name      = "LowerThreshold"
-    value     = 1
+    value     = 20
   }
 
   setting {
     namespace = "aws:autoscaling:trigger"
     name      = "LowerBreachScaleIncrement"
     value     = -1
+  }
+
+  setting {
+    namespace = "aws:autoscaling:trigger"
+    name      = "BreachDuration"
+    value     = var.breach_duration
+  }
+
+  setting {
+    namespace = "aws:autoscaling:trigger"
+    name      = "Period"
+    value     = var.period
   }
 
   setting {
