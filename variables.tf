@@ -40,6 +40,48 @@ variable "max_instance" {
   default     = 4
 }
 
+variable "mesure_name" {
+  description = "The metric that's used for your Auto Scaling trigger"
+  type        = string
+  default     = "NetworkOut"
+}
+
+variable "statistic" {
+  description = "The Statistic the trigger uses"
+  type        = string
+  default     = "Average"
+}
+
+variable "unit" {
+  description = "The unit for the trigger measurement"
+  type        = string
+  default     = "Bytes"
+}
+
+variable "upper_threshold" {
+  description = "If the measurement is higher than this number for the breach duration, a trigger is invoked."
+  type        = number
+  default     = 6000000
+}
+
+variable "upper_breach_scale_increment" {
+  description = "Specifies how many Amazon EC2 instances to add when performing a scaling activity."
+  type        = number
+  default     = 1
+}
+
+variable "lower_threshold" {
+  description = "If the measurement falls below this number for the breach duration, a trigger is invoked."
+  type        = number
+  default     = 2000000
+}
+
+variable "lower_breach_scale_increment" {
+  description = "How many Amazon EC2 instances to remove when performing a scaling activity."
+  type        = number
+  default     = -1
+}
+
 variable "breach_duration" {
   description = "The amount of time, in minutes, a metric can be beyond its defined limit"
   type        = number

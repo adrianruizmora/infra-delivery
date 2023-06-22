@@ -44,43 +44,43 @@ resource "aws_elastic_beanstalk_environment" "compute" {
   setting {
     namespace = "aws:autoscaling:trigger"
     name      = "MeasureName"
-    value     = "CPUUtilization"
+    value     = var.mesure_name
   }
 
   setting {
     namespace = "aws:autoscaling:trigger"
     name      = "Statistic"
-    value     = "Average"
+    value     = var.statistic
   }
 
   setting {
     namespace = "aws:autoscaling:trigger"
     name      = "Unit"
-    value     = "Percent"
+    value     = var.unit
   }
 
   setting {
     namespace = "aws:autoscaling:trigger"
     name      = "UpperThreshold"
-    value     = 50
+    value     = var.upper_threshold
   }
 
   setting {
     namespace = "aws:autoscaling:trigger"
     name      = "UpperBreachScaleIncrement"
-    value     = 1
+    value     = var.upper_breach_scale_increment
   }
 
   setting {
     namespace = "aws:autoscaling:trigger"
     name      = "LowerThreshold"
-    value     = 20
+    value     = var.lower_threshold
   }
 
   setting {
     namespace = "aws:autoscaling:trigger"
     name      = "LowerBreachScaleIncrement"
-    value     = -1
+    value     = var.lower_breach_scale_increment
   }
 
   setting {
