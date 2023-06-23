@@ -33,7 +33,7 @@ resource "aws_elastic_beanstalk_environment" "compute" {
   setting {
     namespace = "aws:elasticbeanstalk:cloudwatch:logs"
     name      = "RetentionInDays"
-    value     = "31"
+    value     = "30"
   }
 
   setting {
