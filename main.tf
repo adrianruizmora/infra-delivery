@@ -7,6 +7,21 @@ resource "aws_elastic_beanstalk_environment" "compute" {
   wait_for_ready_timeout = "20m"
 
   setting {
+    namespace = "aws:ec2:vpc"
+    name      = "VPCId"
+    value     = var.vpc
+  }
+
+  dynamic "setting" {
+    for_each = var.subnets
+    content {
+      namespace = "aws:ec2:vpc"
+      name      = "Subnets"
+      value     = setting.value
+    }
+  }
+
+  setting {
     namespace = "aws:autoscaling:launchconfiguration"
     name      = "EC2KeyName"
     value     = var.ssh_access_key
