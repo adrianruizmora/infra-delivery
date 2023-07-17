@@ -21,6 +21,15 @@ resource "aws_elastic_beanstalk_environment" "compute" {
     }
   }
 
+  dynamic "setting" {
+    for_each = var.subnets
+    content {
+      namespace = "aws:ec2:vpc"
+      name      = "ELBSubnets"
+      value     = setting.value
+    }
+  }
+
   setting {
     namespace = "aws:autoscaling:launchconfiguration"
     name      = "EC2KeyName"
