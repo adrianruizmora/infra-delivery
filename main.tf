@@ -26,6 +26,12 @@ resource "aws_elastic_beanstalk_environment" "compute" {
 
   setting {
     namespace = "aws:autoscaling:launchconfiguration"
+    name      = "SecurityGroups"
+    value     = var.security_groups
+  }
+
+  setting {
+    namespace = "aws:autoscaling:launchconfiguration"
     name      = "EC2KeyName"
     value     = var.ssh_access_key
   }
