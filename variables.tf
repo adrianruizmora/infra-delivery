@@ -19,9 +19,8 @@ variable "vpc" {
 }
 
 variable "subnets" {
-  description = "subnets in a VPC"
-  type        = map(string)
-  default     = {}
+  description = "subnets in a VPC separated by comma"
+  type        = string
 }
 
 variable "ssh_access_key" {

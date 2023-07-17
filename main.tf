@@ -12,22 +12,16 @@ resource "aws_elastic_beanstalk_environment" "compute" {
     value     = var.vpc
   }
 
-  dynamic "setting" {
-    for_each = var.subnets
-    content {
-      namespace = "aws:ec2:vpc"
-      name      = "Subnets"
-      value     = setting.value
-    }
+  setting {
+    namespace = "aws:ec2:vpc"
+    name      = "Subnets"
+    value     = var.subnets
   }
 
-  dynamic "setting" {
-    for_each = var.subnets
-    content {
-      namespace = "aws:ec2:vpc"
-      name      = "ELBSubnets"
-      value     = setting.value
-    }
+  setting {
+    namespace = "aws:ec2:vpc"
+    name      = "ELBSubnets"
+    value     = var.subnets
   }
 
   setting {
