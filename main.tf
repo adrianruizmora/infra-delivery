@@ -24,11 +24,11 @@ resource "aws_elastic_beanstalk_environment" "compute" {
     value     = var.subnets
   }
 
-  setting {
-    namespace = "aws:autoscaling:launchconfiguration"
-    name      = "SecurityGroups"
-    value     = var.security_groups
-  }
+  # setting {
+  #   namespace = "aws:autoscaling:launchconfiguration"
+  #   name      = "SecurityGroups"
+  #   value     = var.security_groups
+  # }
 
   setting {
     namespace = "aws:autoscaling:launchconfiguration"

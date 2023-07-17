@@ -23,10 +23,10 @@ variable "subnets" {
   type        = string
 }
 
-variable "security_groups" {
-  description = "ec2 security groups separated by comma"
-  type        = string
-}
+# variable "security_groups" {
+#   description = "ec2 security groups separated by comma"
+#   type        = string
+# }
 
 variable "ssh_access_key" {
   description = "ssh key use to access ec2 instances"
