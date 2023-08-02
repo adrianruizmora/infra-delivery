@@ -18,14 +18,10 @@ variable "vpc" {
   type        = string
 }
 
-variable "managed_security_group" {
-  description = "Assign an existing security group to your environment’s load balancer, instead of creating a new one."
-  type        = string
-}
-
 variable "security_groups" {
   description = "A list of security groups to attach to the load balancer."
   type        = string
+  default     = ""
 }
 
 variable "subnets" {

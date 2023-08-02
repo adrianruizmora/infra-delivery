@@ -1,3 +1,32 @@
+data "cloudflare_ip_ranges" "cloudflare" {
+}
+
+resource "aws_security_group" "AllowOnlyCloudflareProxyIps" {
+  name        = "AWSEBLoadBalancerSecurityGroup-${var.application}-${var.environment}"
+  description = "Accepts ingress traffic from Cloudflare"
+  vpc_id      = var.vpc
+
+  ingress {
+    description = "Cloudflare traffic"
+    protocol    = "tcp"
+
+    cidr_blocks      = data.cloudflare_ip_ranges.cloudflare.ipv4_cidr_blocks
+    ipv6_cidr_blocks = data.cloudflare_ip_ranges.cloudflare.ipv6_cidr_blocks
+
+    # Using "Full, Full(strict), Strict" SSL? Change to port 443.
+    from_port = 80
+    to_port   = 80
+  }
+
+  egress {
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-1"
+    cidr_blocks      = ["0.0.0.0/0"]
+    ipv6_cidr_blocks = ["::/0"]
+  }
+}
+
 resource "aws_elastic_beanstalk_environment" "compute" {
   name                   = "${var.application}-${var.environment}"
   application            = var.application
@@ -15,13 +44,13 @@ resource "aws_elastic_beanstalk_environment" "compute" {
   setting {
     namespace = "aws:elbv2:loadbalancer"
     name      = "ManagedSecurityGroup"
-    value     = var.managed_security_group
+    value     = var.aws_security_group.AllowOnlyCloudflareProxyIps.id
   }
 
- setting {
+  setting {
     namespace = "aws:elbv2:loadbalancer"
     name      = "SecurityGroups"
-    value     = var.security_groups
+    value     = var.security_groups == "" ? var.aws_security_group.AllowOnlyCloudflareProxyIps.id : "${var.security_groups},${var.aws_security_group.AllowOnlyCloudflareProxyIps.id}"
   }
 
   setting {
