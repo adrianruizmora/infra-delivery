@@ -24,7 +24,7 @@ variable "managed_security_group" {
 }
 
 variable "security_groups" {
-  description = "Assign an existing security group to your environment’s load balancer, instead of creating a new one."
+  description = "A list of security groups to attach to the load balancer."
   type        = string
 }
 
