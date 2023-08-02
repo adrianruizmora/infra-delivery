@@ -13,6 +13,18 @@ resource "aws_elastic_beanstalk_environment" "compute" {
   }
 
   setting {
+    namespace = "aws:elbv2:loadbalancer"
+    name      = "ManagedSecurityGroup"
+    value     = var.managed_security_group
+  }
+
+ setting {
+    namespace = "aws:elbv2:loadbalancer"
+    name      = "SecurityGroups"
+    value     = var.security_groups
+  }
+
+  setting {
     namespace = "aws:ec2:vpc"
     name      = "Subnets"
     value     = var.subnets
