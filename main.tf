@@ -1,6 +1,19 @@
-# provider "cloudflare" {
-#   api_token = var.cloudflare_api_token
-# }
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 4.67.0"
+    }
+    cloudflare = {
+      source  = "cloudflare/cloudflare"
+      version = "3.31.0"
+    }
+  }
+}
+
+provider "cloudflare" {
+  api_token = var.cloudflare_api_token
+}
 
 data "cloudflare_ip_ranges" "cloudflare_ranges" {}
 
