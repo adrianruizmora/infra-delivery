@@ -129,12 +129,6 @@ variable "cloudflare_zone_id" {
   sensitive   = true
 }
 
-# variable "cloudflare_api_token" {
-#   description = "cloudflare api token"
-#   type        = string
-#   sensitive   = true
-# }
-
 variable "subdomain" {
   description = "desired subdomain for the application"
   type        = string
