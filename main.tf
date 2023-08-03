@@ -11,10 +11,6 @@ terraform {
   }
 }
 
-provider "cloudflare" {
-  api_token = var.cloudflare_api_token
-}
-
 data "cloudflare_ip_ranges" "cloudflare_ranges" {}
 
 resource "aws_security_group" "AllowOnlyCloudflareProxyIps" {
