@@ -1,8 +1,8 @@
-provider "cloudflare" {
-  api_token = var.cloudflare_api_token
-}
+# provider "cloudflare" {
+#   api_token = var.cloudflare_api_token
+# }
 
-data "cloudflare_ip_ranges" "cloudflare" {}
+data "cloudflare_ip_ranges" "cloudflare_ranges" {}
 
 resource "aws_security_group" "AllowOnlyCloudflareProxyIps" {
   name        = "AWSEBLoadBalancerSecurityGroup-${var.application}-${var.environment}"
@@ -13,8 +13,8 @@ resource "aws_security_group" "AllowOnlyCloudflareProxyIps" {
     description = "Cloudflare traffic"
     protocol    = "tcp"
 
-    cidr_blocks      = data.cloudflare_ip_ranges.cloudflare.ipv4_cidr_blocks
-    ipv6_cidr_blocks = data.cloudflare_ip_ranges.cloudflare.ipv6_cidr_blocks
+    cidr_blocks      = data.cloudflare_ip_ranges.cloudflare_ranges.ipv4_cidr_blocks
+    ipv6_cidr_blocks = data.cloudflare_ip_ranges.cloudflare_ranges.ipv6_cidr_blocks
 
     # Using "Full, Full(strict), Strict" SSL? Change to port 443.
     from_port = 80
