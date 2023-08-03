@@ -1,5 +1,8 @@
-data "cloudflare_ip_ranges" "cloudflare" {
+provider "cloudflare" {
+  api_token = var.cloudflare_api_token
 }
+
+data "cloudflare_ip_ranges" "cloudflare" {}
 
 resource "aws_security_group" "AllowOnlyCloudflareProxyIps" {
   name        = "AWSEBLoadBalancerSecurityGroup-${var.application}-${var.environment}"
@@ -212,4 +215,12 @@ resource "aws_elastic_beanstalk_environment" "compute" {
     }
   }
 
+}
+
+resource "cloudflare_record" "compute" {
+  zone_id = var.cloudflare_zone_id
+  name    = var.subdomain
+  value   = immutable_elasticbeanstalk.eb_app_cname
+  type    = "CNAME"
+  proxied = true
 }
