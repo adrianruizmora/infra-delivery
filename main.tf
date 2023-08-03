@@ -233,7 +233,7 @@ resource "aws_elastic_beanstalk_environment" "compute" {
 resource "cloudflare_record" "compute" {
   zone_id = var.cloudflare_zone_id
   name    = var.subdomain
-  value   = immutable_elasticbeanstalk.eb_app_cname
+  value   = aws_elastic_beanstalk_environment.compute.eb_app_cname
   type    = "CNAME"
   proxied = true
 }
