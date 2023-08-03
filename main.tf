@@ -41,6 +41,10 @@ resource "aws_security_group" "AllowOnlyCloudflareProxyIps" {
     cidr_blocks      = ["0.0.0.0/0"]
     ipv6_cidr_blocks = ["::/0"]
   }
+
+  tags = {
+    Name = "${var.application}-${var.environment}"
+  }
 }
 
 resource "aws_elastic_beanstalk_environment" "compute" {
@@ -231,9 +235,10 @@ resource "aws_elastic_beanstalk_environment" "compute" {
 }
 
 resource "cloudflare_record" "compute" {
-  zone_id = var.cloudflare_zone_id
-  name    = var.subdomain
-  value   = aws_elastic_beanstalk_environment.compute.cname
-  type    = "CNAME"
-  proxied = true
+  zone_id         = var.cloudflare_zone_id
+  name            = var.subdomain
+  value           = aws_elastic_beanstalk_environment.compute.cname
+  type            = "CNAME"
+  proxied         = true
+  allow_overwrite = var.allow_overwrite
 }

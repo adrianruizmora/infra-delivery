@@ -123,22 +123,25 @@ variable "application_variables" {
   default     = {}
 }
 
-//declared as TF_VAR
 variable "cloudflare_zone_id" {
   description = "wemap zone id of domain in cloudflare"
   type        = string
   sensitive   = true
 }
 
-//declared as TF_VAR
 variable "cloudflare_api_token" {
   description = "cloudflare api token"
   type        = string
   sensitive   = true
 }
 
-//declared as TF_VAR
 variable "subdomain" {
   description = "desired subdomain for the application"
   type        = string
+}
+
+variable "allow_overwrite" {
+  description = "Overwrite cloudflare dns record"
+  type        = bool
+  default     = false
 }
