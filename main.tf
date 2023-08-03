@@ -60,13 +60,13 @@ resource "aws_elastic_beanstalk_environment" "compute" {
   setting {
     namespace = "aws:elbv2:loadbalancer"
     name      = "ManagedSecurityGroup"
-    value     = var.aws_security_group.AllowOnlyCloudflareProxyIps.id
+    value     = aws_security_group.AllowOnlyCloudflareProxyIps.id
   }
 
   setting {
     namespace = "aws:elbv2:loadbalancer"
     name      = "SecurityGroups"
-    value     = var.security_groups == "" ? var.aws_security_group.AllowOnlyCloudflareProxyIps.id : "${var.security_groups},${var.aws_security_group.AllowOnlyCloudflareProxyIps.id}"
+    value     = var.security_groups == "" ? aws_security_group.AllowOnlyCloudflareProxyIps.id : "${var.security_groups},${aws_security_group.AllowOnlyCloudflareProxyIps.id}"
   }
 
   setting {
