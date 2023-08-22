@@ -29,6 +29,11 @@ variable "subnets" {
   type        = string
 }
 
+variable "notification_topic_arn" {
+  description = "The Amazon Resource Name (ARN) for the topic you subscribed to."
+  type        = string
+}
+
 variable "ssh_source_restriction" {
   description = "Used to lock down SSH access to an environment."
   type        = string

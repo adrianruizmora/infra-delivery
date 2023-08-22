@@ -82,6 +82,12 @@ resource "aws_elastic_beanstalk_environment" "compute" {
   }
 
   setting {
+    namespace = "aws:elasticbeanstalk:sns:topics"
+    name      = "Notification Topic ARN"
+    value     = var.notification_topic_arn
+  }
+
+  setting {
     namespace = "aws:autoscaling:launchconfiguration"
     name      = "SSHSourceRestriction"
     value     = var.ssh_source_restriction
