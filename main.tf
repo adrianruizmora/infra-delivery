@@ -83,6 +83,12 @@ resource "aws_elastic_beanstalk_environment" "compute" {
 
   setting {
     namespace = "aws:elasticbeanstalk:sns:topics"
+    name      = "Notification Endpoint"
+    value     = var.notification_endpoint
+  }
+
+  setting {
+    namespace = "aws:elasticbeanstalk:sns:topics"
     name      = "Notification Topic ARN"
     value     = var.notification_topic_arn
   }

@@ -29,6 +29,11 @@ variable "subnets" {
   type        = string
 }
 
+variable "notification_endpoint" {
+  description = "The endpoint where you want to be notified of important events affecting your application."
+  type        = string
+}
+
 variable "notification_topic_arn" {
   description = "The Amazon Resource Name (ARN) for the topic you subscribed to."
   type        = string
