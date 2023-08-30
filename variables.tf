@@ -13,6 +13,11 @@ variable "solution_stack" {
   type        = string
 }
 
+variable "command_timeout" {
+  description = "The amount of time, in seconds, to wait for an instance to complete executing commands."
+  type        = string
+}
+
 variable "vpc" {
   description = "VPC where elasticbeanstalk will be created"
   type        = string

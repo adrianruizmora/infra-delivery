@@ -58,6 +58,12 @@ resource "aws_elastic_beanstalk_environment" "compute" {
   }
 
   setting {
+    namespace = "aws:elasticbeanstalk:command"
+    name      = "Timeout"
+    value     = var.command_timeout
+  }
+
+  setting {
     namespace = "aws:elbv2:loadbalancer"
     name      = "ManagedSecurityGroup"
     value     = aws_security_group.AllowOnlyCloudflareProxyIps.id
