@@ -33,6 +33,7 @@ variable "loadbalancer_security_groups" {
 variable "autoscaling_security_groups" {
   description = "Lists the Amazon EC2 security groups to assign to the EC2 instances in the Auto Scaling group to define firewall rules for the instances."
   type        = string
+  default     = ""
 }
 
 variable "subnets" {
