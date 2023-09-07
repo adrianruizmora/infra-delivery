@@ -24,10 +24,15 @@ variable "vpc" {
   type        = string
 }
 
-variable "security_groups" {
+variable "loadbalancer_security_groups" {
   description = "A list of security groups to attach to the load balancer."
   type        = string
   default     = ""
+}
+
+variable "autoscaling_security_groups" {
+  description = "Lists the Amazon EC2 security groups to assign to the EC2 instances in the Auto Scaling group to define firewall rules for the instances."
+  type        = string
 }
 
 variable "subnets" {

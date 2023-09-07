@@ -72,7 +72,13 @@ resource "aws_elastic_beanstalk_environment" "compute" {
   setting {
     namespace = "aws:elbv2:loadbalancer"
     name      = "SecurityGroups"
-    value     = var.security_groups == "" ? aws_security_group.AllowOnlyCloudflareProxyIps.id : "${var.security_groups},${aws_security_group.AllowOnlyCloudflareProxyIps.id}"
+    value     = var.loadbalancer_security_groups == "" ? aws_security_group.AllowOnlyCloudflareProxyIps.id : "${var.loadbalancer_security_groups},${aws_security_group.AllowOnlyCloudflareProxyIps.id}"
+  }
+
+  setting {
+    namespace = "aws:autoscaling:launchconfiguration"
+    name      = "SecurityGroups"
+    value     = var.autoscaling_security_groups
   }
 
   setting {
