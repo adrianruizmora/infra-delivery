@@ -43,6 +43,7 @@ resource "aws_security_group" "AllowOnlyCloudflareProxyIps" {
   }
 }
 
+
 resource "aws_elastic_beanstalk_environment" "compute" {
   name                   = "${var.application}-${var.environment}"
   application            = var.application
@@ -252,6 +253,18 @@ resource "aws_elastic_beanstalk_environment" "compute" {
     }
   }
 
+}
+
+# This resource is used to add a rule into a existing security group (created manually)
+# And that has access to a EFS (given manually)
+resource "aws_security_group_rule" "AllowEFSAccess" {
+  security_group_id = var.security_group_with_efs_access
+
+  type        = "ingress"
+  from_port   = 2049
+  to_port     = 2049
+  protocol    = "tcp"
+  source_security_group_id = aws_elastic_beanstalk_environment.compute.autoscaling_security_groups
 }
 
 resource "cloudflare_record" "compute" {
