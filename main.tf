@@ -44,6 +44,7 @@ resource "aws_security_group" "AllowOnlyCloudflareProxyIps" {
 }
 
 resource "aws_efs_access_point" "efs_access_point" {
+  count          = var.efs_file_system_id != "" ? 1 : 0
   file_system_id = var.efs_file_system_id
   posix_user {
     uid = 1000
@@ -249,6 +250,12 @@ resource "aws_elastic_beanstalk_environment" "compute" {
     namespace = "aws:elasticbeanstalk:application"
     name      = "Application Healthcheck URL"
     value     = var.healthcheck_endpoint
+  }
+
+  setting {
+    namespace = "aws:elasticbeanstalk:application:environment"
+    name      = "EFS_ACCESS_POINT_ID"
+    value     = var.efs_file_system_id == "" ? "null" : aws_efs_access_point.efs_access_point.id
   }
 
   dynamic "setting" {
