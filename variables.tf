@@ -165,5 +165,5 @@ variable "allow_overwrite" {
 variable "security_group_with_efs_access" {
   description = "Security group to apply this rule to."
   type        = string
-  # TODO: DEFAULT?
+  default = ""
 }
