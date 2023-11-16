@@ -162,7 +162,7 @@ variable "allow_overwrite" {
   default     = false
 }
 
-variable "security_group_with_efs_access" {
+variable "security_group_id_with_efs_access" {
   description = "Security group to apply this rule to."
   type        = string
   default     = ""
