@@ -43,6 +43,13 @@ resource "aws_security_group" "AllowOnlyCloudflareProxyIps" {
   }
 }
 
+resource "aws_efs_access_point" "efs_access_point" {
+  file_system_id = var.efs_file_system_id
+  posix_user {
+    uid = 1000
+    gid = 1000
+  }
+}
 
 resource "aws_elastic_beanstalk_environment" "compute" {
   name                   = "${var.application}-${var.environment}"
@@ -259,16 +266,16 @@ resource "aws_elastic_beanstalk_environment" "compute" {
 # And that has been given access to a EFS (manually)
 # If the ID of existing security group it's not given
 # The creation of this ressource will be skipped.
-resource "aws_security_group_rule" "AllowEFSAccess" {
-  count                    = var.security_group_id_with_efs_access != "" ? 1 : 0
-  security_group_id        = var.security_group_id_with_efs_access
-  description              = "${var.application}-${var.environment}"
-  type                     = "ingress"
-  from_port                = 2049
-  to_port                  = 2049
-  protocol                 = "tcp"
-  source_security_group_id = aws_elastic_beanstalk_environment.compute.autoscaling_security_groups
-}
+# resource "aws_security_group_rule" "AllowEFSAccess" {
+#   count                    = var.security_group_id_with_efs_access != "" ? 1 : 0
+#   security_group_id        = var.security_group_id_with_efs_access
+#   description              = "${var.application}-${var.environment}"
+#   type                     = "ingress"
+#   from_port                = 2049
+#   to_port                  = 2049
+#   protocol                 = "tcp"
+#   source_security_group_id = aws_elastic_beanstalk_environment.compute.autoscaling_security_groups
+# }
 
 resource "cloudflare_record" "compute" {
   zone_id         = var.cloudflare_zone_id
