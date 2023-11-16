@@ -255,7 +255,7 @@ resource "aws_elastic_beanstalk_environment" "compute" {
   setting {
     namespace = "aws:elasticbeanstalk:application:environment"
     name      = "EFS_ACCESS_POINT_ID"
-    value     = var.efs_file_system_id == "" ? "null" : aws_efs_access_point.efs_access_point.id
+    value     = var.efs_file_system_id == "" ? "null" : aws_efs_access_point.efs_access_point[count.index].id
   }
 
   dynamic "setting" {
