@@ -274,16 +274,15 @@ resource "aws_elastic_beanstalk_environment" "compute" {
 # If the ID of existing security group it's not given
 # The creation of this ressource will be skipped.
 resource "aws_security_group_rule" "AllowEFSAccess" {
-  depends_on = [ aws_elastic_beanstalk_environment.compute ]
-  #count                    = var.security_group_id_with_efs_access != "" ? 1 : 0
-  for_each                 = var.security_group_id_with_efs_access == "" ? [] : toset(aws_elastic_beanstalk_environment.compute.autoscaling_groups)
-  security_group_id        = var.security_group_id_with_efs_access
-  description              = "${var.application}-${var.environment}"
-  type                     = "ingress"
-  from_port                = 2049
-  to_port                  = 2049
-  protocol                 = "tcp"
-  source_security_group_id = each.value.id
+  depends_on        = [aws_elastic_beanstalk_environment.compute]
+  count             = var.security_group_id_with_efs_access != "" ? 1 : 0
+  security_group_id = var.security_group_id_with_efs_access
+  description       = "${var.application}-${var.environment}"
+  type              = "ingress"
+  from_port         = 2049
+  to_port           = 2049
+  protocol          = "tcp"
+  self              = true
 }
 
 resource "cloudflare_record" "compute" {
