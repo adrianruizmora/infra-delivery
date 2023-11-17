@@ -162,14 +162,14 @@ variable "allow_overwrite" {
   default     = false
 }
 
-# variable "security_group_id_with_efs_access" {
-#   description = "Security group to apply this rule to."
-#   type        = string
-#   default     = ""
-# }
-
-variable "efs_file_system_id" {
-  description = "Provides an Elastic File System (EFS) access point."
+variable "security_group_id_with_efs_access" {
+  description = "Security group to apply this rule to."
   type        = string
   default     = ""
 }
+
+# variable "efs_file_system_id" {
+#   description = "Provides an Elastic File System (EFS) access point."
+#   type        = string
+#   default     = ""
+# }
