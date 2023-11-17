@@ -274,6 +274,7 @@ resource "aws_elastic_beanstalk_environment" "compute" {
 # If the ID of existing security group it's not given
 # The creation of this ressource will be skipped.
 resource "aws_security_group_rule" "AllowEFSAccess" {
+  depends_on = [ aws_elastic_beanstalk_environment.compute ]
   #count                    = var.security_group_id_with_efs_access != "" ? 1 : 0
   for_each                 = var.security_group_id_with_efs_access == "" ? [] : toset(aws_elastic_beanstalk_environment.compute.autoscaling_groups)
   security_group_id        = var.security_group_id_with_efs_access
