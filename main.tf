@@ -247,8 +247,8 @@ resource "aws_elastic_beanstalk_environment" "compute" {
   }
 
   setting {
-    namespace = "aws:elasticbeanstalk:application"
-    name      = "Application Healthcheck URL"
+    namespace = "aws:elasticbeanstalk:environment:process:default"
+    name      = "HealthCheckPath"
     value     = var.healthcheck_endpoint
   }
 
